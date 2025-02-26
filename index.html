@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>武泽旭 | 艺术家官方网站</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="#home" class="home-link">
+                    <span class="cn-name">武泽旭</span>
+                    <span class="en-name">ZEXU WU</span>
+                </a>
+            </div>
+            <ul>
+                <li><a href="#works">作品</a></li>
+                <li><a href="#about">关于</a></li>
+                <li class="lang-switch">
+                    <button>中文</button>
+                    <span>/</span>
+                    <button>EN</button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="scroll-container">
+        <!-- 作品大图预览 -->
+        <div class="artwork-preview" id="artworkPreview">
+            <div class="preview-content">
+                <img src="" alt="" id="previewImage">
+                <div class="preview-info">
+                    <h2 id="previewTitle"></h2>
+                    <p id="previewMaterial"></p>
+                    <p id="previewSize"></p>
+                    <p id="previewYear"></p>
+                </div>
+                <button class="close-preview">&times;</button>
+            </div>
+        </div>
+
+        <!-- 主页部分 -->
+        <section id="home" class="page-section">
+            <div class="home-bg">
+                <img src="images/home-poster.jpg" alt="武泽旭艺术作品展示">
+            </div>
+        </section>
+
+        <!-- 作品部分 -->
+        <section id="works" class="page-section">
+            <div class="works-container">
+                <div class="year-filter">
+                    <h3>年份</h3>
+                    <ul>
+                        <li><button class="year-btn active" data-year="2024">2024</button></li>
+                        <li><button class="year-btn" data-year="2023">2023</button></li>
+                        <li><button class="year-btn" data-year="2022">2022</button></li>
+                        <li><button class="year-btn" data-year="2021">2021</button></li>
+                    </ul>
+                </div>
+                
+                <div class="works-content">
+                    <div class="artwork-grid">
+                        <article class="artwork">
+                            <img src="images/works/2024/work1.jpg" alt="无题 No.1">
+                            <div class="artwork-info">
+                                <h2>无题 No.1</h2>
+                                <p>材料：布面油画</p>
+                                <p>尺寸：180 × 150 cm</p>
+                                <p>年份：2024</p>
+                            </div>
+                        </article>
+                        <article class="artwork">
+                            <img src="images/works/2024/work2.jpg" alt="无题 No.2">
+                            <div class="artwork-info">
+                                <h2>无题 No.2</h2>
+                                <p>材料：布面油画</p>
+                                <p>尺寸：160 × 140 cm</p>
+                                <p>年份：2024</p>
+                            </div>
+                        </article>
+                        <article class="artwork">
+                            <img src="images/works/2024/work3.jpg" alt="无题 No.3">
+                            <div class="artwork-info">
+                                <h2>无题 No.3</h2>
+                                <p>材料：布面油画</p>
+                                <p>尺寸：200 × 180 cm</p>
+                                <p>年份：2024</p>
+                            </div>
+                        </article>
+                        <article class="artwork">
+                            <img src="images/works/2024/work4.jpg" alt="无题 No.4">
+                            <div class="artwork-info">
+                                <h2>无题 No.4</h2>
+                                <p>材料：布面油画</p>
+                                <p>尺寸：150 × 120 cm</p>
+                                <p>年份：2024</p>
+                            </div>
+                        </article>
+                        <article class="artwork">
+                            <img src="images/works/2024/work5.jpg" alt="无题 No.5">
+                            <div class="artwork-info">
+                                <h2>无题 No.5</h2>
+                                <p>材料：布面油画</p>
+                                <p>尺寸：180 × 150 cm</p>
+                                <p>年份：2024</p>
+                            </div>
+                        </article>
+                        <article class="artwork">
+                            <img src="images/works/2024/work6.jpg" alt="无题 No.6">
+                            <div class="artwork-info">
+                                <h2>无题 No.6</h2>
+                                <p>材料：布面油画</p>
+                                <p>尺寸：200 × 150 cm</p>
+                                <p>年份：2024</p>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="load-more">
+                        <button id="loadMoreBtn">展开</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 关于部分 -->
+        <section id="about" class="page-section">
+            <div class="about-container">
+                <div class="bio-resume-section">
+                    <h2>艺术家介绍</h2>
+                    <div class="bio-content">
+                        <p>武泽旭，1985年生于北京。2010年毕业于中央美术学院油画系，2013年获巴黎高等艺术学院硕士学位。</p>
+                        <p>他的创作关注当代社会中个体的生存状态，通过独特的视觉语言探讨人与自然、传统与现代之间的关系。其作品涵盖油画、装置、影像等多种媒介。</p>
+                    </div>
+                    
+                    <button class="toggle-resume">查看简历</button>
+                    
+                    <div class="resume-content hidden">
+                        <div class="resume-item">
+                            <h3>教育背景</h3>
+                            <p>2013 巴黎高等艺术学院 艺术创作硕士</p>
+                            <p>2010 中央美术学院油画系 学士</p>
+                        </div>
+                        <div class="resume-item">
+                            <h3>个展</h3>
+                            <p>2023 《时间的褶皱》，上海当代艺术馆，上海</p>
+                            <p>2022 《边界》，威尼斯双年展中国馆，意大利</p>
+                            <p>2021 《沉默的风景》，北京今日美术馆，北京</p>
+                        </div>
+                        <div class="resume-item">
+                            <h3>重要群展</h3>
+                            <p>2023 第15届光州双年展，韩国</p>
+                            <p>2022 "当代艺术的新维度"，蓬皮杜艺术中心，巴黎</p>
+                            <p>2021 "东方与西方的对话"，泰特现代美术馆，伦敦</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-section">
+                    <h2>联系方式</h2>
+                    <p>邮箱：contact@wuzexu.com</p>
+                    <p>工作室：上海市徐汇区艺术区A栋201室</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
