@@ -188,37 +188,25 @@ nav ul li a:hover::after {
 /* 作品悬停效果 */
 .artwork {
     position: relative;
-    transition: transform 0.3s ease;
+    width: 100%;
+    background-color: #fff;
     overflow: hidden;
-    opacity: 1;
-    transition: opacity 0.5s ease, transform 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    aspect-ratio: 3 / 4;
     cursor: pointer;
-}
-
-.artwork:hover {
-    transform: translateY(-5px);
-}
-
-.view-details {
-    margin-top: 1rem;
-    padding: 0.5rem 1rem;
-    background: none;
-    border: 1px solid #333;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.view-details:hover {
-    background: #333;
-    color: white;
 }
 
 .artwork img {
-    width: 100%;
-    height: 100%;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
     object-fit: contain;
-    object-position: center;
-    background: #f8f8f8;
+    display: block;
+    transition: transform 0.3s ease;
 }
 
 .artwork-info {
@@ -227,28 +215,36 @@ nav ul li a:hover::after {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.97);
+    background: rgba(255, 255, 255, 0.7);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    visibility: hidden;
+    transition: all 0.3s ease;
     padding: 2rem;
     text-align: center;
-    cursor: pointer;
 }
 
-.artwork-info:hover {
-    background: rgba(255, 255, 255, 0.99);
+/* 鼠标悬停效果 */
+.artwork:hover .artwork-info {
+    opacity: 1;
+    visibility: visible;
 }
 
+.artwork:hover img {
+    transform: scale(1.02);
+}
+
+/* 移除之前的 hover::after 效果 */
 .artwork-info::after {
-    content: '查看大图';
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
+    display: none;
+}
+
+/* 添加查看大图提示 */
+.artwork-info p:last-child {
+    margin-top: 1.5rem;
     padding: 0.5rem 1.5rem;
     border: 1px solid #333;
     font-size: 0.9rem;
@@ -256,10 +252,22 @@ nav ul li a:hover::after {
     transition: all 0.3s ease;
 }
 
-.artwork-info:hover::after {
+.artwork-info:hover p:last-child {
     background: #333;
     color: white;
     opacity: 1;
+}
+
+/* 让文字更清晰可见 */
+.artwork-info h2 {
+    color: #000;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.artwork-info p {
+    color: #333;
+    margin-bottom: 0.3rem;
 }
 
 /* 主要内容区域 */
@@ -314,9 +322,8 @@ main {
 
 /* 联系页面样式 */
 .contact-info {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem 0;
+    margin: 0;
+    padding: 0;
 }
 
 .contact-info h1 {
@@ -422,6 +429,299 @@ main {
 
     .subscribe-form button {
         width: 100%;
+    }
+
+    /* 调整导航栏Logo的左边距 */
+    .logo {
+        padding-left: 1rem;
+    }
+
+    /* 调整导航菜单的右边距 */
+    nav ul {
+        padding-right: 1rem;
+    }
+
+    /* 调整导航项之间的间距 */
+    nav ul li {
+        margin-left: 1.5rem;
+    }
+
+    /* 调整语言切换按钮的边距 */
+    .lang-switch {
+        margin-left: 1.5rem;
+    }
+
+    /* 其他移动端样式保持不变 */
+    .about-container {
+        grid-template-columns: 1fr !important;
+        gap: 3rem;
+        padding: 2rem 1.5rem;
+        margin-top: 60px;
+    }
+
+    .bio-resume-section {
+        padding-right: 0;
+    }
+
+    .contact-section {
+        border-left: none;
+        padding-left: 0;
+        padding: 0;
+        margin-top: 2rem;
+    }
+
+    .bio-resume-section h2,
+    .contact-section h2 {
+        font-size: 1.4rem;
+        margin-bottom: 1.5rem;
+        letter-spacing: 0.02em;
+    }
+
+    .bio-content p {
+        font-size: 0.95rem;
+        line-height: 1.8;
+        margin-bottom: 1.5rem;
+        color: #333;
+    }
+
+    .resume-item h3 {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+        color: #444;
+    }
+
+    .resume-item p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+        margin-bottom: 0.8rem;
+        color: #666;
+    }
+
+    .contact-info p {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+
+    .contact-info span {
+        min-width: 70px;
+        color: #666;
+    }
+
+    /* 社交媒体部分调整 */
+    .social-media {
+        margin-top: 2rem;
+        padding-top: 0;
+        border-top: none;
+    }
+
+    .social-media h3 {
+        font-size: 1.1rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .social-media p {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+
+    .social-media span {
+        min-width: 70px;
+        color: #666;
+    }
+
+    /* 展开按钮调整 */
+    .toggle-resume {
+        margin: 2rem 0;
+        padding: 0.7rem 1.8rem;
+        font-size: 0.9rem;
+    }
+
+    /* 调整页面整体边距 */
+    #about.page-section {
+        padding: 80px 1rem 40px;
+    }
+
+    #works .artwork-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    /* 作品页面整体布局调整 */
+    .works-section {
+        margin-top: 60px;
+        padding: 0;
+        min-height: 100vh;
+        position: relative;
+    }
+
+    .works-container {
+        flex-direction: column;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        min-height: calc(100vh - 60px);
+    }
+
+    /* 年份筛选器样式调整 */
+    .year-filter {
+        position: fixed;
+        top: 50px; /* 降低顶部位置 */
+        left: 0;
+        right: 0;
+        padding: 0.5rem 1rem; /* 减小内边距 */
+        margin: 0;
+        display: flex;
+        justify-content: flex-start;
+        gap: 0.6rem; /* 减小间距 */
+        background: rgba(255, 255, 255, 0.98);
+        border-bottom: 1px solid #eee;
+        z-index: 100;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* 作品内容区域调整 */
+    .works-content {
+        width: 100%;
+        padding-top: 40px; /* 减小顶部间距 */
+    }
+
+    /* 作品网格调整为双列 */
+    .artwork-grid {
+        display: grid;
+        grid-template-columns: 1fr !important;
+        gap: 3rem !important;
+        margin: 0;
+        padding: 1.5rem;
+        width: 100%;
+    }
+
+    /* 作品容器调整 */
+    .artwork {
+        width: 100%;
+        aspect-ratio: 4/5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        margin: 0;
+    }
+
+    .artwork img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+    }
+
+    /* 作品信息样式调整 */
+    .artwork-info {
+        padding: 1.5rem;
+    }
+
+    .artwork-info h2 {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .artwork-info p {
+        font-size: 0.9rem;
+        margin-bottom: 0.3rem;
+    }
+
+    /* 展开按钮调整 */
+    .load-more {
+        margin: 2rem 0;
+        padding: 0 1rem;
+    }
+
+    .load-more button {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+        display: block;
+    }
+
+    /* 移除所有可能冲突的样式 */
+    #works {
+        padding: 0 !important;
+        height: auto !important;
+        background: white;
+    }
+
+    #works .artwork-grid {
+        margin: 0 !important;
+        padding: 1rem !important;
+        gap: 3rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .year-btn {
+        padding: 0.4rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    .year-filter {
+        padding: 0.6rem 1rem;
+    }
+
+    .artwork-grid {
+        gap: 2.5rem !important;
+        padding: 1rem;
+    }
+
+    .artwork-info {
+        padding: 1.2rem;
+    }
+
+    .artwork-info h2 {
+        font-size: 0.95rem;
+    }
+
+    .artwork-info p {
+        font-size: 0.85rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .works-section {
+        margin-top: 50px;
+    }
+
+    .about-container {
+        padding: 1.5rem 1rem;
+        gap: 2rem;
+    }
+
+    .bio-resume-section h2,
+    .contact-section h2 {
+        font-size: 1.3rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .bio-content p {
+        font-size: 0.9rem;
+        line-height: 1.7;
+    }
+
+    .resume-item h3 {
+        font-size: 1rem;
+    }
+
+    .resume-item p,
+    .contact-info p,
+    .social-media p {
+        font-size: 0.85rem;
+    }
+
+    .contact-section {
+        padding-top: 2rem;
+    }
+
+    .contact-info span,
+    .social-media span {
+        min-width: 65px;
     }
 }
 
@@ -535,14 +835,11 @@ main {
 }
 
 .scroll-container {
-    scroll-snap-type: y proximity;
-    overflow-y: scroll;
+    overflow-y: auto;
     height: 100vh;
 }
 
 .scroll-container > section {
-    scroll-snap-align: start;
-    scroll-snap-stop: normal;
     min-height: 100vh;
 }
 
@@ -563,32 +860,47 @@ html {
 }
 
 /* 年份筛选列表样式 */
+.works-section {
+    position: relative;
+    padding: 2rem 0;
+    margin-top: 80px; /* 为导航栏留出空间 */
+}
+
 .year-filter {
-    width: 150px;
-    padding-top: 3rem;
+    position: sticky;
+    top: 100px; /* 增加顶部距离，避免被导航栏遮挡 */
+    left: 0;
+    padding-right: 2rem;
+    max-height: calc(100vh - 120px); /* 调整最大高度 */
+    overflow-y: auto;
+    z-index: 10; /* 确保年份列表在适当的层级 */
 }
 
-.year-filter h3 {
-    font-size: 1.2rem;
-    font-weight: normal;
-    margin-bottom: 1.5rem;
-    color: #666;
+.year-filter::-webkit-scrollbar {
+    width: 4px;
 }
 
-.year-filter ul {
-    list-style: none;
+.year-filter::-webkit-scrollbar-track {
+    background: #f1f1f1;
 }
 
-.year-filter li {
-    margin-bottom: 1.2rem;
+.year-filter::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 2px;
+}
+
+.year-filter::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 
 .year-btn {
-    background: none;
+    display: block;
+    padding: 0.3rem 0.8rem; /* 减小按钮内边距 */
+    margin-bottom: 0.5rem;
     border: none;
-    padding: 0.5rem 0;
-    font-size: 1.1rem;
-    color: #999;
+    background: none;
+    color: #666;
+    font-size: 0.8rem; /* 减小字体大小 */
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: left;
@@ -596,12 +908,23 @@ html {
 }
 
 .year-btn:hover {
-    color: #333;
+    color: #000;
+    background-color: #f5f5f5;
 }
 
 .year-btn.active {
-    color: #333;
+    color: #000;
     font-weight: 500;
+    background-color: #f0f0f0;
+}
+
+/* 确保作品网格区域有合适的边距 */
+.artwork-grid {
+    margin-left: 120px; /* 根据年份列表的宽度调整 */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 0 2rem;
 }
 
 /* 作品内容区域 */
@@ -655,8 +978,8 @@ html {
     margin: 0 auto;
     padding: 2rem;
     display: grid;
-    grid-template-columns: 7fr 3fr;
-    gap: 4rem;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
 }
 
 .bio-resume-section {
@@ -695,30 +1018,6 @@ html {
     margin-bottom: 2rem;
 }
 
-/* 响应式调整 */
-@media (max-width: 768px) {
-    .about-container {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-
-    .resume-section,
-    .contact-section {
-        padding: 0;
-    }
-
-    .contact-section {
-        border-left: none;
-        border-top: 1px solid #eee;
-        padding-top: 2rem;
-    }
-
-    #works .artwork-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-}
-
 /* 隐藏额外作品 */
 .artwork.hidden {
     position: absolute;
@@ -744,6 +1043,8 @@ html {
     justify-content: center;
     align-items: center;
     z-index: 9999;
+    cursor: zoom-in;
+    user-select: none;
 }
 
 .preview-content {
@@ -761,29 +1062,54 @@ html {
     max-height: 80vh;
     object-fit: contain;
     display: block;
+    transition: transform 0.2s ease-out;
+    transform-origin: center center;
+    will-change: transform;
+}
+
+.preview-content.zoomed {
+    cursor: grab;
+}
+
+.preview-content.zoomed:active {
+    cursor: grabbing;
 }
 
 .preview-info {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
     color: white;
-    margin-top: 1.5rem;
     text-align: center;
+    opacity: 0.9;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    pointer-events: none;
+    z-index: 10001;
 }
 
-.preview-info h2 {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-}
-
-.preview-info p {
-    font-size: 0.9rem;
-    margin-bottom: 0.3rem;
-    color: #ccc;
+.zoom-hint {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 10001;
+    white-space: nowrap;
 }
 
 .close-preview {
-    position: absolute;
-    top: -2rem;
-    right: -2rem;
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
     background: none;
     border: none;
     color: white;
@@ -791,6 +1117,13 @@ html {
     cursor: pointer;
     padding: 0.5rem;
     line-height: 1;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+    z-index: 10000;
+}
+
+.close-preview:hover {
+    opacity: 1;
 }
 
 footer {
@@ -834,4 +1167,63 @@ footer a:hover {
     color: #666;
     background: #f8f8f8;
     border-radius: 4px;
-} 
+}
+
+.social-media {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: none;
+}
+
+.social-media h3 {
+    font-size: 1.2rem;
+    font-weight: normal;
+    margin-bottom: 1rem;
+    color: #666;
+}
+
+.social-media p {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.social-media span {
+    color: #666;
+    margin-right: 0.5rem;
+    min-width: 60px;
+    display: inline-block;
+}
+
+.social-media a {
+    color: #333;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease;
+    padding-bottom: 2px;
+}
+
+.social-media a:hover {
+    border-bottom-color: #333;
+}
+
+.contact-section {
+    padding-left: 2rem;
+    border-left: 1px solid #eee;
+}
+
+.contact-info p {
+    margin-bottom: 1rem;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.contact-info span {
+    color: #666;
+    margin-right: 0.5rem;
+    min-width: 60px;
+    display: inline-block;
+}
