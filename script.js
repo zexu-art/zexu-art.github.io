@@ -5,144 +5,169 @@ document.addEventListener('DOMContentLoaded', function() {
     let isExpanded = false;
 
     // 生成新的作品HTML
-    function createArtworkHTML(index) {
-        const works = {
-            1: {
-                title: "无题 No.1",
-                image: "images/works/2024/work1.jpg",
-                material: "布面油画",
-                size: "180 × 150",
-                year: "2024"
-            },
-            2: {
-                title: "无题 No.2",
-                image: "images/works/2024/work2.jpg",
-                material: "布面油画",
-                size: "160 × 140",
-                year: "2024"
-            },
-            3: {
-                title: "无题 No.3",
-                image: "images/works/2024/work3.jpg",
-                material: "布面油画",
-                size: "200 × 180",
-                year: "2024"
-            },
-            4: {
-                title: "无题 No.4",
-                image: "images/works/2024/work4.jpg",
-                material: "布面油画",
-                size: "150 × 120",
-                year: "2024"
-            },
-            5: {
-                title: "无题 No.5",
-                image: "images/works/2024/work5.jpg",
-                material: "布面油画",
-                size: "180 × 150",
-                year: "2024"
-            },
-            6: {
-                title: "无题 No.6",
-                image: "images/works/2024/work6.jpg",
-                material: "布面油画",
-                size: "200 × 160",
-                year: "2024"
-            },
-            7: {
-                title: "无题 No.7",
-                image: "images/works/2023/work7.jpg",
-                material: "布面油画",
-                size: "200 × 160",
-                year: "2023"
-            },
-            // 添加更多作品信息...
-        };
-
-        const work = works[index];
+    function createArtworkHTML(artwork) {
+        if (!artwork || !artwork.image) {
+            console.warn('Invalid artwork data:', artwork);
+            return '';
+        }
+        
         return `
-            <article class="artwork hidden">
-                <img src="${work.image}" alt="${work.title}">
+            <article class="artwork">
+                <img src="images/works/${artwork.year}/${artwork.image}" 
+                     alt="${artwork.title}"
+                     onerror="this.onerror=null; this.src='images/placeholder.jpg'; this.classList.add('image-error')"
+                >
                 <div class="artwork-info">
-                    <h2>${work.title}</h2>
-                    <p>材料：${work.material}</p>
-                    <p>尺寸：${work.size} cm</p>
-                    <p>年份：${work.year}</p>
+                    <h2>${artwork.title}</h2>
+                    <p>材料：${artwork.material}</p>
+                    <p>尺寸：${artwork.size}</p>
+                    <p>年份：${artwork.year}</p>
                 </div>
             </article>
         `;
     }
 
-    // 预先生成额外的作品但隐藏它们
-    for (let i = 7; i <= 18; i++) {
-        const artworkHTML = createArtworkHTML(i);
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = artworkHTML;
-        artworkGrid.appendChild(tempDiv.firstElementChild);
+    // 作品数据
+    const artworksData = {
+        "2024": [
+            {
+                image: "work1.jpg",
+                title: "无题 No.1",
+                material: "布面油画",
+                size: "180 × 150 cm",
+                year: "2024"
+            },
+            {
+                image: "work2.jpg",
+                title: "无题 No.2",
+                material: "布面油画",
+                size: "160 × 140 cm",
+                year: "2024"
+            },
+            {
+                image: "work3.jpg",
+                title: "无题 No.3",
+                material: "布面油画",
+                size: "200 × 180 cm",
+                year: "2024"
+            },
+            {
+                image: "work4.jpg",
+                title: "无题 No.4",
+                material: "布面油画",
+                size: "150 × 120 cm",
+                year: "2024"
+            },
+            {
+                image: "work5.jpg",
+                title: "无题 No.5",
+                material: "布面油画",
+                size: "180 × 150 cm",
+                year: "2024"
+            },
+            {
+                image: "work6.jpg",
+                title: "无题 No.6",
+                material: "布面油画",
+                size: "200 × 150 cm",
+                year: "2024"
+            }
+        ],
+        "2023": []
+    };
+
+    // 初始化显示2024年的作品
+    function initializeArtworks(year) {
+        if (!artworkGrid || !artworksData[year]) {
+            console.warn('Missing elements or data');
+            return;
+        }
+
+        try {
+            artworkGrid.innerHTML = artworksData[year]
+                .filter(artwork => artwork && artwork.image) // 过滤无效数据
+                .map(artwork => createArtworkHTML(artwork))
+                .join('');
+            
+            // 初始化作品预览
+            initializeArtworkPreviews();
+        } catch (error) {
+            console.error('Error initializing artworks:', error);
+            artworkGrid.innerHTML = '<p class="error-message">加载作品时出现错误，请稍后再试。</p>';
+        }
     }
 
     // 展开/收起功能
-    loadMoreBtn.addEventListener('click', function() {
-        const hiddenArtworks = artworkGrid.querySelectorAll('.artwork.hidden');
-        const allArtworks = artworkGrid.querySelectorAll('.artwork');
-        isExpanded = !isExpanded;
-        
-        if (isExpanded) {
-            // 展开
-            worksSection.classList.add('expanded');
-            loadMoreBtn.textContent = '收起';
-            
-            // 逐个显示隐藏的作品
-            hiddenArtworks.forEach((artwork, index) => {
-                artwork.classList.remove('hidden');
-                setTimeout(() => {
-                    artwork.style.opacity = '1';
-                    artwork.style.visibility = 'visible';
-                    artwork.style.position = 'relative';
-                }, index * 100);
-            });
-
-            // 平滑滚动到新显示的内容
-            setTimeout(() => {
-                window.scrollTo({
-                    top: window.scrollY + window.innerHeight * 0.3,
-                    behavior: 'smooth'
-                });
-            }, 100);
-
-            setTimeout(() => {
-                initializeArtworkPreviews();
-            }, 500);
-        } else {
-            // 收起
-            loadMoreBtn.textContent = '展开';
-            
-            // 隐藏额外的作品
-            allArtworks.forEach((artwork, index) => {
-                if (index >= 6) { // 保持前6个作品可见（2行x3列）
-                    artwork.style.opacity = '0';
-                    artwork.style.visibility = 'hidden';
-                    artwork.style.position = 'absolute';
-                    artwork.classList.add('hidden');
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', function() {
+            try {
+                const hiddenArtworks = artworkGrid.querySelectorAll('.artwork.hidden');
+                const allArtworks = artworkGrid.querySelectorAll('.artwork');
+                isExpanded = !isExpanded;
+                
+                if (isExpanded) {
+                    expandArtworks(hiddenArtworks);
+                } else {
+                    collapseArtworks(allArtworks);
                 }
+            } catch (error) {
+                console.error('Error in expand/collapse:', error);
+            }
+        });
+    }
+
+    function expandArtworks(hiddenArtworks) {
+        worksSection.classList.add('expanded');
+        loadMoreBtn.textContent = '收起';
+        
+        hiddenArtworks.forEach((artwork, index) => {
+            artwork.classList.remove('hidden');
+            setTimeout(() => {
+                artwork.style.opacity = '1';
+                artwork.style.visibility = 'visible';
+                artwork.style.position = 'relative';
+            }, index * 100);
+        });
+
+        setTimeout(() => {
+            window.scrollTo({
+                top: window.scrollY + window.innerHeight * 0.3,
+                behavior: 'smooth'
             });
+        }, 100);
 
-            // 滚动回作品区域顶部
-            setTimeout(() => {
-                window.scrollTo({
-                    top: worksSection.offsetTop,
-                    behavior: 'smooth'
-                });
-            }, 100);
-            
-            setTimeout(() => {
-                worksSection.classList.remove('expanded');
-            }, 500);
-        }
-    });
+        setTimeout(() => {
+            initializeArtworkPreviews();
+        }, 500);
+    }
 
-    // 初始化按钮文本
-    loadMoreBtn.textContent = '展开';
+    function collapseArtworks(allArtworks) {
+        loadMoreBtn.textContent = '展开';
+        
+        allArtworks.forEach((artwork, index) => {
+            if (index >= 6) {
+                artwork.style.opacity = '0';
+                artwork.style.visibility = 'hidden';
+                artwork.style.position = 'absolute';
+                artwork.classList.add('hidden');
+            }
+        });
+
+        setTimeout(() => {
+            window.scrollTo({
+                top: worksSection.offsetTop,
+                behavior: 'smooth'
+            });
+        }, 100);
+        
+        setTimeout(() => {
+            worksSection.classList.remove('expanded');
+        }, 500);
+    }
+
+    // 初始化
+    initializeArtworks("2024");
+    if (loadMoreBtn) loadMoreBtn.textContent = '展开';
 
     // 添加简历展开/收起功能
     const toggleResumeBtn = document.querySelector('.toggle-resume');
@@ -157,28 +182,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // 年份筛选功能
-    const yearBtns = document.querySelectorAll('.year-btn');
-    const artworks = document.querySelectorAll('.artwork');
-
-    yearBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            // 更新按钮状态
-            yearBtns.forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-
-            const selectedYear = this.dataset.year;
-            
-            // 筛选作品
-            artworks.forEach(artwork => {
-                const artworkYear = artwork.querySelector('.artwork-info p:last-child')
-                    .textContent.match(/\d{4}/)[0];
+    const yearButtons = document.querySelectorAll('.year-btn');
+    yearButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const year = this.dataset.year;
+            if (artworksData[year]) {
+                artworkGrid.innerHTML = artworksData[year]
+                    .map(artwork => createArtworkHTML(artwork))
+                    .join('');
                 
-                if (artworkYear === selectedYear) {
-                    artwork.style.display = '';
-                } else {
-                    artwork.style.display = 'none';
-                }
-            });
+                // 更新按钮状态
+                yearButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+            }
         });
     });
 

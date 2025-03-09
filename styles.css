@@ -791,4 +791,47 @@ html {
     cursor: pointer;
     padding: 0.5rem;
     line-height: 1;
+}
+
+footer {
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    background-color: #fff;
+    z-index: 100;
+    border-top: 1px solid #eee;
+}
+
+footer a {
+    color: #666;
+    text-decoration: none;
+    font-size: 14px;
+    display: inline-block;
+}
+
+footer a:hover {
+    color: #333;
+}
+
+/* 图片错误处理样式 */
+.image-error {
+    background-color: #f8f8f8;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.error-message {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+    background: #f8f8f8;
+    border-radius: 4px;
 } 
